@@ -46,9 +46,6 @@ $wdOrientPortrait       = 0
 $wdLineBreak            = 6
 $wdPageBreak            = 7
 $wdStory                = 6
-$wdSeekMainDocument     = 0
-$wdSeekPrimaryHeader    = 1
-$wdSeekPrimaryFooter    = 2
 $wdFormatXMLDocument    = 12
 $wdCellAlignVerticalCenter = 1
 
@@ -143,7 +140,6 @@ try {
     }
 
     # --- Header ---
-    $word.ActiveWindow.ActivePane.View.SeekView = $wdSeekPrimaryHeader
     $headerRange = $section.Headers.Item(1).Range
     $headerRange.ParagraphFormat.Alignment = $wdAlignParagraphRight
     $headerRange.Text = '{{ auditor_company }}  |  {{ confidentiality }}'
@@ -152,16 +148,12 @@ try {
     $headerRange.Font.Name  = 'Calibri'
 
     # --- Footer ---
-    $word.ActiveWindow.ActivePane.View.SeekView = $wdSeekPrimaryFooter
     $footerRange = $section.Footers.Item(1).Range
     $footerRange.ParagraphFormat.Alignment = $wdAlignParagraphCenter
     $footerRange.Text = '{{ report_title }}  |  {{ client_name }}  |  {{ report_date }}'
     $footerRange.Font.Size  = 8
     $footerRange.Font.Color = $MidGrey
     $footerRange.Font.Name  = 'Calibri'
-
-    # Back to main document
-    $word.ActiveWindow.ActivePane.View.SeekView = $wdSeekMainDocument
 
     # =========================================================================
     # COVER PAGE
